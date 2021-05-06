@@ -19,4 +19,12 @@ def findAllFilePathsStartingWith(starts,path)
      return arrayList
 end
 
+def findAllFilePathsOfDepthStartingWith(fromDepth,toDepth,starts,path)
+
+
+end
+
+p "Part 1"
 puts findAllFilePathsStartingWith("read", "data")
+
+p "Part 2"
