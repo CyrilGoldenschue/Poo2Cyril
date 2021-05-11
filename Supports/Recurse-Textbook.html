@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+
+    <link href="kramdown/document.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="kramdown/document_print.css" media="print" rel="stylesheet" type="text/css" />
+    <title>Recursivité</title>
+    <meta name="generator" content="kramdown 1.12.0" />
+  </head>
+  <body class="standalone markdown">
+
+    <h1 class="no_toc" id="main-title">Recursivité</h1>
+    
+    
+
+    
+      <p>Pascal Hurni <a href="mailto:phi@cpnv.ch">phi@cpnv.ch</a></p>
+
+    
+
+    
+      <p>mars 2014</p>
+
+    
+
+    
+        <h1 class="no_toc" id="toc-header">Table des matières</h1>
+        <ol id="markdown-toc">
+  <li><a href="#recursivit" id="markdown-toc-recursivit">Recursivité</a>    <ol>
+      <li><a href="#dfinition" id="markdown-toc-dfinition">Définition</a>        <ol>
+          <li><a href="#implications" id="markdown-toc-implications">Implications</a></li>
+        </ol>
+      </li>
+      <li><a href="#histoire-sans-fin" id="markdown-toc-histoire-sans-fin">Histoire sans fin</a></li>
+      <li><a href="#histoire-sans-fin-1" id="markdown-toc-histoire-sans-fin-1">Histoire sans fin</a></li>
+      <li><a href="#contexte-sans-fin" id="markdown-toc-contexte-sans-fin">Contexte sans fin</a></li>
+      <li><a href="#contexte-avec-fin" id="markdown-toc-contexte-avec-fin">Contexte avec fin</a></li>
+      <li><a href="#where-to-apply" id="markdown-toc-where-to-apply">Where to apply</a></li>
+    </ol>
+  </li>
+</ol>
+
+      
+    
+    
+    <h1 id="recursivit">Recursivité</h1>
+<!-- .slide: data-state="heading" -->
+
+<p><img src="Recurse/fractal.png" alt="Fractal" class="heading" />
+ </p>
+
+<h2 id="dfinition">Définition</h2>
+
+<p>Une fonction qui s’appelle elle-même</p>
+
+<h3 id="implications">Implications</h3>
+<!-- .element: class="fragment" -->
+
+<ul>
+  <li>Un langage sachant gérer la pile des appels avec contexte</li>
+  <li>La fonction doit éviter de s’appeler elle-même à un moment donné: <strong>condition de sortie</strong> <!-- .element: class="fragment" --></li>
+</ul>
+
+<!-- .element: class="fragment" -->
+<p> </p>
+
+<h2 id="histoire-sans-fin">Histoire sans fin</h2>
+
+<div class="language-java highlighter-coderay"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre><a href="#n1" name="n1">1</a>
+<a href="#n2" name="n2">2</a>
+<a href="#n3" name="n3">3</a>
+<a href="#n4" name="n4">4</a>
+<a href="#n5" name="n5">5</a>
+<a href="#n6" name="n6">6</a>
+<a href="#n7" name="n7">7</a>
+<a href="#n8" name="n8">8</a>
+</pre></td>
+  <td class="code"><pre><span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> main(<span class="predefined-type">String</span><span class="type">[]</span> args) {
+  infinite();
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> infinite() {
+  <span class="predefined-type">System</span>.out.print(<span class="string"><span class="delimiter">&quot;</span><span class="content">.</span><span class="delimiter">&quot;</span></span>);
+  infinite();
+}
+</pre></td>
+</tr></table>
+</div>
+<p> </p>
+
+<h2 id="histoire-sans-fin-1">Histoire sans fin</h2>
+
+<pre><code>.........................
+Exception in thread "main" java.lang.StackOverflowError
+	at java.io.BufferedOutputStream.write(BufferedOutputStream.java:111)
+	at java.io.PrintStream.write(PrintStream.java:430)
+	at sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:202)
+	at sun.nio.cs.StreamEncoder.implFlushBuffer(StreamEncoder.java:272)
+	at sun.nio.cs.StreamEncoder.flushBuffer(StreamEncoder.java:85)
+	at java.io.OutputStreamWriter.flushBuffer(OutputStreamWriter.java:168)
+	at java.io.PrintStream.write(PrintStream.java:477)
+	at java.io.PrintStream.print(PrintStream.java:619)
+	at Recurse.infinite(Recurse.java:8)
+	at Recurse.infinite(Recurse.java:9)
+	at Recurse.infinite(Recurse.java:9)
+	at Recurse.infinite(Recurse.java:9)
+</code></pre>
+<p> </p>
+
+<h2 id="contexte-sans-fin">Contexte sans fin</h2>
+
+<div class="language-java highlighter-coderay"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre><a href="#n1" name="n1">1</a>
+<a href="#n2" name="n2">2</a>
+<a href="#n3" name="n3">3</a>
+<a href="#n4" name="n4">4</a>
+<a href="#n5" name="n5">5</a>
+<a href="#n6" name="n6">6</a>
+<a href="#n7" name="n7">7</a>
+<a href="#n8" name="n8">8</a>
+<a href="#n9" name="n9">9</a>
+</pre></td>
+  <td class="code"><pre><span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> main(<span class="predefined-type">String</span><span class="type">[]</span> args) {
+  infinite();
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> infinite(<span class="type">int</span> v) {
+  <span class="predefined-type">System</span>.out.print(v);
+  <span class="predefined-type">System</span>.out.print(<span class="string"><span class="delimiter">&quot;</span><span class="content">-</span><span class="delimiter">&quot;</span></span>);
+  infinite(v+<span class="integer">1</span>);
+}
+</pre></td>
+</tr></table>
+</div>
+<p> </p>
+
+<h2 id="contexte-avec-fin">Contexte avec fin</h2>
+
+<div class="language-java put-left highlighter-coderay"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre><a href="#n1" name="n1">1</a>
+<a href="#n2" name="n2">2</a>
+<a href="#n3" name="n3">3</a>
+<a href="#n4" name="n4">4</a>
+<a href="#n5" name="n5">5</a>
+<a href="#n6" name="n6">6</a>
+<a href="#n7" name="n7">7</a>
+<a href="#n8" name="n8">8</a>
+<a href="#n9" name="n9">9</a>
+<strong><a href="#n10" name="n10">10</a></strong>
+<a href="#n11" name="n11">11</a>
+<a href="#n12" name="n12">12</a>
+<a href="#n13" name="n13">13</a>
+<a href="#n14" name="n14">14</a>
+<a href="#n15" name="n15">15</a>
+</pre></td>
+  <td class="code"><pre><span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> main(<span class="predefined-type">String</span><span class="type">[]</span> args)
+{
+  infinite(<span class="integer">0</span>);
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> infinite(<span class="type">int</span> v)
+{
+  <span class="predefined-type">System</span>.out.print(v);
+  <span class="predefined-type">System</span>.out.print(<span class="string"><span class="delimiter">&quot;</span><span class="content">-</span><span class="delimiter">&quot;</span></span>);
+  <span class="keyword">if</span> (v &lt;= <span class="integer">4</span>) {
+    infinite(v+<span class="integer">1</span>);
+    <span class="predefined-type">System</span>.out.print(v);
+    <span class="predefined-type">System</span>.out.print(<span class="string"><span class="delimiter">&quot;</span><span class="content">-</span><span class="delimiter">&quot;</span></span>);
+  }
+}
+</pre></td>
+</tr></table>
+</div>
+
+<pre class="put-right"><code>infinite(0)            PILE
+  print(0)             0
+  infinite(1)          0
+    print(1)           0  1
+    infinite(2)        0  1  
+      print(2)         0  1  2
+      infinite(3)      0  1  2
+        print(3)       0  1  2  3
+        infinite(4)    0  1  2  3
+          print(4)     0  1  2  3  4
+          infinite(5)  0  1  2  3  4
+            print(5)   0  1  2  3  4  5
+          print(4)     0  1  2  3  4
+        print(3)       0  1  2  3
+      print(2)         0  1  2
+    print(1)           0  1
+  print(0)             0
+</code></pre>
+
+<p> </p>
+
+<h2 id="where-to-apply">Where to apply</h2>
+
+<p>Recursion is applied to problems (situations) where you can break it up (reduce it) into smaller parts, and each part(s) looks similar to the original problem.
+Good examples of where things that contain smaller parts similar to itself are:</p>
+
+<p>tree structure (a branch is like a tree)
+lists (part of a list is still a list)
+containers (Russian dolls)
+sequences (part of a sequence looks like the next)
+groups of objects (a subgroup is a still a group of objects)</p>
+
+<p>Recursion is a technique to keep breaking the problem down into smaller and smaller pieces,
+until one of those pieces become small enough to be a piece-of-cake. 
+Of course, after you break them up, you then have to “stitch” the results back together in the right order to form a total solution of your original problem.</p>
+
+<p>Some recursive sorting algorithms, tree-walking algorithms, map/reduce algorithms, divide-and-conquer are all examples of this technique.</p>
+
+<p>In computer programming, most stack-based call-return type languages already have the capabilities built in for recursion: i.e. 
+break the problem down into smaller pieces ==&gt; call itself on a smaller subset of the original data), 
+keep track on how the pieces are divided ==&gt; call stack,
+stitch the results back ==&gt; stack-based return</p>
+
+
+  </body>
+</html>
