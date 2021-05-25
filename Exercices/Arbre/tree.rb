@@ -23,12 +23,12 @@ class WordSearchTree
         i = 0
         node = ""
         allLetters = word.chars
-        allLetters.each do |letter, index|
+        allLetters.each do |letter|
             if(i == 0)
                 @root.add_child(node = Node.new(letter, false))    
                   
-            elsif(index == allLetters.size-1)
-                @root.add_child(node = Node.new(letter, true)) 
+            elsif(i == allLetters.size-1)
+                node.add_child(node = Node.new(letter, true)) 
             else
                 @root.add_child(node = Node.new(letter, false))        
             end
@@ -36,11 +36,6 @@ class WordSearchTree
         end
 
         p @root
-    end
-
-
-    def add_children
-        @root.add_child(Node.new)
     end
 
     def fill_tree(list)
