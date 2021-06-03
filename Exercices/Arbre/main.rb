@@ -8,4 +8,7 @@ tree = WordSearchTree.new
 #functions_tree = WordSearchTree.new
 #functions_tree.fill_tree(functions_array)
 
+
 tree.insert("test")
+tree.insert("tester")
+tree.insert("testeur")
