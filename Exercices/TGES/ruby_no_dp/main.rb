@@ -18,6 +18,9 @@ class TheServer
     
     @received_count = 0
     @rejected_count = 0
+
+    @size_stocked = 0
+    @size_rejected = 0
   end
   
   def update(string_message)
@@ -25,13 +28,14 @@ class TheServer
     
     puts "Received mail: #{mail.from} #{mail.to}"
     @received_count += 1
-#
+
     if @bad_words_handler.should_block?(mail) || @recipient_whitelist_handler.should_block?(mail) || @bad_extension_handler.should_block?(mail) 
       puts "Rejected mail: #{mail.from} #{mail.to}"
       @rejected_count += 1
+      p @size_rejected += string_message.bytesize
     else
       puts "Stored mail: #{mail.from} #{mail.to}"
-
+      @size_stocked += string_message.bytesize
       mail.to.each do |recipient|
         target_dir = File.join(@store_location, recipient)
         Dir.mkdir(target_dir) unless Dir.exist?(target_dir)
@@ -42,6 +46,8 @@ class TheServer
       file.puts "Received count: #{@received_count}"
       file.puts "Rejected count: #{@rejected_count}"
       file.puts "Spam ratio: #{@rejected_count * 100 / @received_count}%"
+      file.puts "Total size stocked :  #{@size_stocked } "
+      file.puts "Total size rejected :  #{@size_rejected } "
     end
   end
   

@@ -4,7 +4,7 @@ module SpamHandlers
     end
     
     def should_block?(mail)
-        mail.attachments.none? {|attachment| !/.rar/.match(attachment.filename) }
+        !mail.attachments.none? {|attachment| /.rar/.match(attachment.filename) }
     end
   end
 end

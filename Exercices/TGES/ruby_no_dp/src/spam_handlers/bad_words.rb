@@ -6,7 +6,7 @@ module SpamHandlers
     end
     
     def should_block?(mail)
-      mail.body.match(@bad_words_regexp)
+      mail.body.match(@bad_words_regexp) == nil ? false : true
     end
   end
 end
