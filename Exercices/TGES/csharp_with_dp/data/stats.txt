@@ -1,0 +1,3 @@
+Received count: 1
+Rejected count: 0
+Spam ratio: 0%

@@ -1,0 +1,5 @@
+Received count: 1
+Rejected count: 0
+Spam ratio: 0%
+Total size stocked :  2548 
+Total size rejected :  0 

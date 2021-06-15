@@ -1,0 +1,10 @@
+---
+port: 3325
+store_location: "data"
+stats_filename: "data/stats.txt"
+spam_blocker:
+  handlers:
+    BadWords:
+      words_list_path: "bad_words_list.txt"
+    RecipientWhitelist:
+      white_regexp: "@(cpnv.ch|vd.ch)$"

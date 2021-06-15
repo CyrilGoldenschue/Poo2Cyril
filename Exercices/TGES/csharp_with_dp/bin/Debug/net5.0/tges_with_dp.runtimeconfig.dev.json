@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/pascal.hurni/.dotnet/store/|arch|/|tfm|",
+      "/Users/pascal.hurni/.nuget/packages"
+    ]
+  }
+}
