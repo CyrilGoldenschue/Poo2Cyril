@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+mkdir build 2>/dev/null
+javac -d build src/**/*.java -Xlint:unchecked
+pushd build
+jar cvf target.jar **/*
+popd

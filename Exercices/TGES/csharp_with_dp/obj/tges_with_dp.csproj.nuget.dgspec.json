@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/pascal.hurni/CPNV/Modules/POO2/Exemples/TheGreatEmailServer/csharp/tges_with_dp/tges_with_dp.csproj": {}
+  },
+  "projects": {
+    "/Users/pascal.hurni/CPNV/Modules/POO2/Exemples/TheGreatEmailServer/csharp/tges_with_dp/tges_with_dp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pascal.hurni/CPNV/Modules/POO2/Exemples/TheGreatEmailServer/csharp/tges_with_dp/tges_with_dp.csproj",
+        "projectName": "tges_with_dp",
+        "projectPath": "/Users/pascal.hurni/CPNV/Modules/POO2/Exemples/TheGreatEmailServer/csharp/tges_with_dp/tges_with_dp.csproj",
+        "packagesPath": "/Users/pascal.hurni/.nuget/packages/",
+        "outputPath": "/Users/pascal.hurni/CPNV/Modules/POO2/Exemples/TheGreatEmailServer/csharp/tges_with_dp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pascal.hurni/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "netDumbster": {
+              "target": "Package",
+              "version": "[2.0.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
